@@ -1,0 +1,66 @@
+{extends file="../templates/main.html"}
+
+{block name=footer}stopka{/block}
+
+{block name=content}
+
+<h3>Kantor</h2>
+
+
+<form class="pure-form pure-form-stacked" action="{$app_url}/app/calc.php" method="post">
+	<fieldset>
+		<label for="kw">Kwota</label>
+		<input id="kw" type="text" placeholder="Kwota" name="kw" value="{$form['kw']}">
+		<label for="operacja">Operacja</label>
+		
+		<select id="operacja" name="operacja">
+			<option value="plneur">z pln na eur</option>
+            <option value="eurpln">z eur na pln</option>
+		</select>
+					
+		<label for="ku">Kurs</label>
+		<input id="ku" type="text" placeholder="Kurs" name="ku" value="{$form['ku']}">
+	</fieldset>
+	<button type="submit" class="pure-button pure-button-primary">Oblicz</button>
+</form>
+
+<div class="messages">
+
+{* wyświeltenie listy błędów, jeśli istnieją *}
+{if isset($messages)}
+	{if count($messages) > 0} 
+		<h4>Wystąpiły błędy: </h4>
+		<ol class="err">
+		{foreach  $messages as $msg}
+		{strip}
+			<li>{$msg}</li>
+		{/strip}
+		{/foreach}
+		</ol>
+	{/if}
+{/if}
+
+{* wyświeltenie listy informacji, jeśli istnieją *}
+{if isset($infos)}
+	{if count($infos) > 0} 
+		<h4>Informacje: </h4>
+		<ol class="inf">
+		{foreach  $infos as $msg}
+		{strip}
+			<li>{$msg}</li>
+		{/strip}
+		{/foreach}
+		</ol>
+	{/if}
+{/if}
+
+{if isset($result)}
+	<h4>Wynik</h4>
+	<p class="res">
+	{$result}
+	</p>
+{/if}
+
+</div>
+
+{/block}
